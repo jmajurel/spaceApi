@@ -9,7 +9,7 @@ const galaxyRouter = require("./routes/galaxy");
 const { handleError } = require("./handlers/handleErrors");
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 //middlewares
 app.use(bodyParser.json());
