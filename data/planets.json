@@ -1,0 +1,44 @@
+[
+  {
+    "name": "mercury",
+    "type": "solid",
+    "picture": "https://solarsystem.nasa.gov/system/stellar_items/image_files/2_feature_1600x900_mercury.jpg",
+    "temperature": 340,
+    "surfaceArea": 0.147
+  },
+  {
+    "name": "venus",
+    "type": "solid",
+    "picture": "https://solarsystem.nasa.gov/system/stellar_items/image_files/3_feature_1600x900_venus.jpg",
+    "temperature": 732,
+    "surfaceArea": 0.92
+  },
+  {
+    "name": "earth",
+    "type": "solid",
+    "picture": "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2018/earthsoxygen.jpg",
+    "temperature": 288,
+    "surfaceArea": 1
+  },
+  {
+    "name": "mars",
+    "type": "solid",
+    "picture": "https://s.hswstatic.com/gif/mars-a1.jpg",
+    "temperature": 210,
+    "surfaceArea": 0.284
+  },
+  {
+    "name": "jupiter",
+    "type": "gas",
+    "picture": "https://news.ucsc.edu/2015/03/images/jupiter-400.jpg",
+    "temperature": 165,
+    "surfaceArea": 121
+  },
+  {
+    "name": "saturn",
+    "type": "gas",
+    "picture": "https://www.gannett-cdn.com/presto/2018/12/19/USAT/5e6faedd-72b1-4209-b8f1-c25e57a7d363-VPC_SATURN_RINGS_nasa.jpg?quality=10",
+    "temperature": 134,
+    "surfaceArea": 83
+  }
+]

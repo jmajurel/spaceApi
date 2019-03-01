@@ -1,0 +1,26 @@
+[
+  {
+    "name": "sun",
+    "type": "yellow dwarf",
+    "distance": 0,
+    "magnitude": 4.85
+  },
+  {
+    "name": "proxima centauri A",
+    "type": "yellow dwarf",
+    "distance": 4.24,
+    "magnitude": 4.38
+  },
+  {
+    "name": "barnard",
+    "type": "red dwarf",
+    "distance": 5.95,
+    "magnitude": 13
+  },
+  {
+    "name": "luhman 16A",
+    "type": "brown dwarf", 
+    "distance": 6.5
+    "magnitude": 14.2
+  }
+]
