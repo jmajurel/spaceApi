@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 require("dotenv").config({ path: __dirname + "/.env" });
 
 const planetRouter = require("./routes/planets");
@@ -12,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 //middlewares
+app.use(cors());
 app.use(bodyParser.json());
 
 //routes
