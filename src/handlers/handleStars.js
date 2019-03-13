@@ -20,7 +20,15 @@ async function getOneStar(req, res, next) {
 
 async function createStar(req, res, next) {
   try {
-    const { name, type, size, mass, temperature } = req.body;
+    const {
+      name,
+      type,
+      mass,
+      distance,
+      diameter,
+      temperature,
+      color
+    } = req.body;
     const foundStar = await db.Star.find({ name });
     if (foundStar) {
       return next({
@@ -33,9 +41,11 @@ async function createStar(req, res, next) {
     const newStar = await db.Star.create({
       name,
       type,
-      size,
       mass,
-      temperature
+      distance,
+      diameter,
+      temperature,
+      color
     });
     await newStar.save();
     return res.status(201).json(newStar);
@@ -45,13 +55,23 @@ async function createStar(req, res, next) {
 }
 async function updateStar(req, res, next) {
   try {
-    const { name, type, size, mass, temperature } = req.body;
+    const {
+      name,
+      type,
+      mass,
+      distance,
+      diameter,
+      temperature,
+      color
+    } = req.body;
     const updatedStar = await db.Star.findByIdAndUpdate(req.params.id, {
       name,
       type,
-      size,
       mass,
-      temperature
+      distance,
+      diameter,
+      temperature,
+      color
     });
     return res.status(201).json(updatedStar);
   } catch (err) {

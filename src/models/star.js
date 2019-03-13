@@ -9,8 +9,11 @@ const starSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  mass: Number,
   distance: Number, //light year from earth
-  magnitude: Number //luminosity absolute
+  diameter: Number,
+  temperature: Number,
+  color: String
 });
 
 module.exports = mongoose.model("Star", starSchema);
