@@ -31,6 +31,7 @@ async function createStar(req, res, next) {
     } = req.body;
     console.log(req.body);
     const foundStar = await db.Star.find({ name });
+    console.log(foundStar);
     if (foundStar) {
       return next({
         error: {
