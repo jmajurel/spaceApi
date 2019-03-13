@@ -29,6 +29,7 @@ async function createStar(req, res, next) {
       temperature,
       color
     } = req.body;
+    console.log(req.body);
     const foundStar = await db.Star.find({ name });
     if (foundStar) {
       return next({
