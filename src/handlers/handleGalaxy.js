@@ -3,8 +3,8 @@ const db = require("../models");
 async function getAllGalaxy(req, res, next) {
   try {
     const galaxy = await db.Galaxy.find()
-      .populate("planets")
-      .populate("stars");
+//      .populate("planets")
+//      .populate("stars");
     return res.status(200).json(galaxy);
   } catch (err) {
     return next(err);
@@ -13,8 +13,8 @@ async function getAllGalaxy(req, res, next) {
 async function getOneGalaxy(req, res, next) {
   try {
     const galaxy = await db.Galaxy.findById(req.params.id)
-      .populate("planets")
-      .populate("stars");
+//      .populate("planets")
+//      .populate("stars");
     return res.status(200).json(galaxy);
   } catch (err) {
     return next(err);
@@ -23,8 +23,10 @@ async function getOneGalaxy(req, res, next) {
 
 async function createGalaxy(req, res, next) {
   try {
-    const { name, planets, stars } = req.body;
-    const foundGalaxy = await db.Galaxy.find({ name });
+    //const { name, planets, stars } = req.body;
+    const { name, description, constellation } = req.body;
+
+    const foundGalaxy = await db.Galaxy.findOne({ name });
     if (foundGalaxy) {
       return next({
         error: {
@@ -33,7 +35,7 @@ async function createGalaxy(req, res, next) {
         }
       });
     }
-    let foundPlanet, foundStar;
+/*    let foundPlanet, foundStar;
     let planetsRef = [];
     for (let i = 0; i < planets.length; i++) {
       foundPlanet = await db.Planet.find({ name: planets[i] });
@@ -44,11 +46,12 @@ async function createGalaxy(req, res, next) {
     for (let i = 0; i < stars.length; i++) {
       foundStar = await db.Star.find({ name: stars[i] });
       if (foundStar) starsRef.push(foundStar._id);
-    }
+    }*/
 
-    const newGalaxy = await db.Galaxy.create({ name, planetsRef, starsRef });
+    //const newGalaxy = await db.Galaxy.create({ name, planetsRef, starsRef });
+    const newGalaxy = await db.Galaxy.create({ name, description, constellation });
     await newGalaxy.save();
-    return res.status(200).json(newGalaxy);
+    return res.status(200).json(newGalaxy);;
   } catch (err) {
     return next(err);
   }
@@ -56,9 +59,9 @@ async function createGalaxy(req, res, next) {
 
 async function updateGalaxy(req, res, next) {
   try {
-    const { name, planets, stars } = req.body;
+    //const { name, planets, stars } = req.body;
 
-    let foundPlanet, foundStar;
+/*    let foundPlanet, foundStar;
     let planetsRef = [];
     for (let i = 0; i < planets.length; i++) {
       foundPlanet = await db.Planet.find({ name: planets[i] });
@@ -69,12 +72,12 @@ async function updateGalaxy(req, res, next) {
     for (let i = 0; i < stars.length; i++) {
       foundStar = await db.Star.find({ name: stars[i] });
       if (foundStar) starsRef.push(foundStar._id);
-    }
-
+    }*/
+    const { name, description, constellation } = req.body;
     const updatedGalaxy = await db.Galaxy.findByIdAndUpdate(req.params.id, {
       name,
-      planetsRef,
-      starsRef
+      description,
+      constellation
     });
     return res.status(201).json(updatedGalaxy);
   } catch (err) {

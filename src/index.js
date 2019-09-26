@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 //app.use("/", planetRouter);
 app.use("/planets", planetRouter);
 app.use("/stars", starRouter);
-app.use("/galaxy", galaxyRouter);
+app.use("/galaxies", galaxyRouter);
 
 //error handler
 app.use("/", function(req, res, next) {

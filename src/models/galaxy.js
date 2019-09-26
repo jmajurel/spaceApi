@@ -5,8 +5,10 @@ const galaxySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  planets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Planet" }],
-  stars: [{ type: mongoose.Schema.Types.ObjectId, ref: "Star" }]
+  description: String,
+  constellation: { type: String, required: true }
+//  planets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Planet" }],
+//  stars: [{ type: mongoose.Schema.Types.ObjectId, ref: "Star" }]
 });
 
 module.exports = mongoose.model("Galaxy", galaxySchema);

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Milky Way",
+    "description": "It is the galaxy that contains our Solar System. It appears as a band because its disk-shaped structure is viewed from within. Galileo Galilei first resolved the band of light into individual stars with his telescope in 1610.",
+    "constellation": "Sagittarius"
+  },
+  {
+    "name": "Andromeda Galaxy",
+    "description": "It is a spiral galaxy approximately 2.5 million light-years from Earth and the nearest major galaxy to the Milky Way. Its name stems from the area of the sky in which it appears the constellation of Andromeda.",
+    "constellation": "Andromeda"
+  },
+  {
+    "name": "Antennae Galaxies",
+    "description": "",
+    "constellation": "Corvus"
+  },
+  {
+    "name": "Black Eye Galaxy",
+    "description": "It is a galaxy which was discovered by Edward Pigott in March 1779 and independently by Johann Elert Bode in April of the same year, as well as by Charles Messier in 1780. It has a spectacular dark band of absorbing dust in front of the galaxy's bright nucleus, giving rise to its nicknames of the \"Black Eye\" or \"Evil Eye\" galaxy.",
+    "constellation": "Coma Berenices"
+  },
+  {
+    "name": "Bode's Galaxy",
+    "description": "It is a spiral galaxy about 12 million light-years away, in the constellation Ursa Major. It was discovered by Johann Elert Bode on December 31, 1774.",
+    "constellation": "Ursa Major"
+  }, 
+  {
+    "name": "Butterfly Galaxies",
+    "description": "",
+    "constellation": "Virgo"
+  },
+  {
+    "name": "Cartwheel Galaxy",
+    "description": "It is a lenticular galaxy and ring galaxy about 500 million light-years away in the constellation Sculptor. It looks like cartwheel that's why astronomer called it 'Cartwheel'.",
+    "constellation": "Sculptor"
+  },
+  {
+    "name": "Cigar Galaxy",
+    "description": "It is a starburst galaxy approximately 12 million light-years away in the constellation Ursa Major.",
+    "constellation": "Ursa Major"
+  }
+]
