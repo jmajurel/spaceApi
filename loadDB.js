@@ -1,11 +1,11 @@
 const fetch = require("node-fetch");
-const planets = require("./data/planets.json");
-const url = "http://localhost:8080/planets";
+const galaxies = require("./data/galaxies.json");
+const url = "http://localhost:8080/galaxies";
 
-for (let i = 0; i < planets.length; i++) {
+for (let i = 0; i < galaxies.length; i++) {
   fetch(url, {
     method: "POST",
-    body: JSON.stringify(planets[i]),
+    body: JSON.stringify(galaxies[i]),
     headers: {
       "Content-Type": "application/json"
     }
