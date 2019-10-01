@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}\\src\\index.js",
-            "port": 8081
+            "port": 8080
         }
     ]
 }
