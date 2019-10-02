@@ -1,8 +1,18 @@
 const db = require("../models");
 
+
 async function getAllStars(req, res, next) {
   try {
-    const stars = await db.Star.find();
+    let [lowerLimit, upperLimit] = [0, 25];
+    const { range } = req.params;
+    if(range) {
+      [lowerLimit, upperLimit] = range.split('-').map(res => Number(res));
+    }
+
+    const stars = await db.Star.find()
+      .skip(lowerLimit)
+      .limit(upperLimit);
+      
     return res.status(200).json(stars);
   } catch (err) {
     return next(err);
