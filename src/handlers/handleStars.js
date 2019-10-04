@@ -9,11 +9,19 @@ async function getAllStars(req, res, next) {
       [lowerLimit, upperLimit] = range.split('-').map(res => Number(res));
     }
 
+    const nbOdStartsInDb = await db.Star.count();
+
     const stars = await db.Star.find()
       .skip(lowerLimit)
       .limit(upperLimit);
+
+    const pageCount = Math.round(nbOdStartsInDb / upperLimit);
       
-    return res.status(200).json(stars);
+    return res.status(200).json({
+      pageCount,
+      currentPage: Math.round(lowerLimit / upperLimit),
+      stars
+    });
   } catch (err) {
     return next(err);
   }
