@@ -2,7 +2,7 @@ const db = require("../models");
 
 async function getAllGalaxy(req, res, next) {
   try {
-    const galaxy = await db.Galaxy.find()
+    const galaxy = await db.Galaxy.find();
 //      .populate("planets")
 //      .populate("stars");
     return res.status(200).json(galaxy);
@@ -12,7 +12,7 @@ async function getAllGalaxy(req, res, next) {
 }
 async function getOneGalaxy(req, res, next) {
   try {
-    const galaxy = await db.Galaxy.findById(req.params.id)
+    const galaxy = await db.Galaxy.findById(req.params.id);
 //      .populate("planets")
 //      .populate("stars");
     return res.status(200).json(galaxy);
@@ -31,8 +31,8 @@ async function createGalaxy(req, res, next) {
       return next({
         error: {
           status: 400,
-          message: "This Galaxy entry already in the database"
-        }
+          message: "This Galaxy entry already in the database",
+        },
       });
     }
 /*    let foundPlanet, foundStar;
@@ -51,7 +51,7 @@ async function createGalaxy(req, res, next) {
     //const newGalaxy = await db.Galaxy.create({ name, planetsRef, starsRef });
     const newGalaxy = await db.Galaxy.create({ name, description, constellation });
     await newGalaxy.save();
-    return res.status(200).json(newGalaxy);;
+    return res.status(200).json(newGalaxy);
   } catch (err) {
     return next(err);
   }
@@ -77,7 +77,7 @@ async function updateGalaxy(req, res, next) {
     const updatedGalaxy = await db.Galaxy.findByIdAndUpdate(req.params.id, {
       name,
       description,
-      constellation
+      constellation,
     });
     return res.status(201).json(updatedGalaxy);
   } catch (err) {
@@ -99,5 +99,5 @@ module.exports = {
   getOneGalaxy,
   createGalaxy,
   updateGalaxy,
-  deleteGalaxy
+  deleteGalaxy,
 };

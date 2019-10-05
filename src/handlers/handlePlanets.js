@@ -26,7 +26,7 @@ async function createPlanet(req, res, next) {
     if (foundPlanet) {
       return next({
         status: 400,
-        message: "Planet already exists in the database"
+        message: "Planet already exists in the database",
       });
     } else {
       const newPlanet = await db.Planet.create({
@@ -34,7 +34,7 @@ async function createPlanet(req, res, next) {
         type,
         picture,
         temperature,
-        surfaceArea
+        surfaceArea,
       });
       await newPlanet.save();
 
@@ -52,7 +52,7 @@ async function updatePlanet(req, res, next) {
       type,
       picture,
       temperature,
-      surfaceArea
+      surfaceArea,
     });
     return res.status(201).json(updatedPlanet);
   } catch (err) {
@@ -73,5 +73,5 @@ module.exports = {
   getOnePlanet,
   createPlanet,
   updatePlanet,
-  deletePlanet
+  deletePlanet,
 };

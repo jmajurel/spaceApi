@@ -3,17 +3,17 @@ const mongoose = require("mongoose");
 const starSchema = mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    required: true
+    required: true,
   },
   mass: Number,
   distance: Number, //light year from earth
   diameter: Number,
   temperature: Number,
-  color: String
+  color: String,
 });
 
 module.exports = mongoose.model("Star", starSchema);

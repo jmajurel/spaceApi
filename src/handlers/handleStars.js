@@ -1,12 +1,11 @@
 const db = require("../models");
 
-
 async function getAllStars(req, res, next) {
   try {
     let [lowerLimit, upperLimit] = [0, 25];
     const { range } = req.params;
-    if(range) {
-      [lowerLimit, upperLimit] = range.split('-').map(res => Number(res));
+    if (range) {
+      [lowerLimit, upperLimit] = range.split("-").map(res => Number(res));
     }
 
     const nbOdStartsInDb = await db.Star.count();
@@ -16,11 +15,11 @@ async function getAllStars(req, res, next) {
       .limit(upperLimit);
 
     const pageCount = Math.round(nbOdStartsInDb / upperLimit);
-      
+
     return res.status(200).json({
       pageCount,
       currentPage: Math.round(lowerLimit / upperLimit),
-      stars
+      stars,
     });
   } catch (err) {
     return next(err);
@@ -45,7 +44,7 @@ async function createStar(req, res, next) {
       distance,
       diameter,
       temperature,
-      color
+      color,
     } = req.body;
 
     const foundStar = await db.Star.findOne({ name });
@@ -54,8 +53,8 @@ async function createStar(req, res, next) {
       return next({
         error: {
           status: 400,
-          message: "This star already exists in the database"
-        }
+          message: "This star already exists in the database",
+        },
       });
     }
     const newStar = await db.Star.create({
@@ -65,7 +64,7 @@ async function createStar(req, res, next) {
       distance,
       diameter,
       temperature,
-      color
+      color,
     });
     await newStar.save();
     return res.status(201).json(newStar);
@@ -82,7 +81,7 @@ async function updateStar(req, res, next) {
       distance,
       diameter,
       temperature,
-      color
+      color,
     } = req.body;
     const updatedStar = await db.Star.findByIdAndUpdate(req.params.id, {
       name,
@@ -91,7 +90,7 @@ async function updateStar(req, res, next) {
       distance,
       diameter,
       temperature,
-      color
+      color,
     });
     return res.status(201).json(updatedStar);
   } catch (err) {
@@ -113,5 +112,5 @@ module.exports = {
   getOneStar,
   createStar,
   updateStar,
-  deleteStar
+  deleteStar,
 };

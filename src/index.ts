@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config({ path: __dirname + "/.env" });
@@ -12,19 +12,19 @@ const { handleError } = require("./handlers/handleErrors");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-//middlewares
+// middlewares
 app.use(cors());
 app.use(bodyParser.json());
 
-//routes
-//app.use("/", planetRouter);
+// routes
+// app.use("/", planetRouter);
 app.use("/planets", planetRouter);
 app.use("/stars", starRouter);
 app.use("/galaxies", galaxyRouter);
 
-//error handler
+// error handler
 app.use("/", function(req, res, next) {
-  const err = new Error("NOT FOUND");
+  const err: any = new Error("NOT FOUND");
   err.status = 404;
   next(err);
 });
