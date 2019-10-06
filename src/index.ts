@@ -1,12 +1,12 @@
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
-const bodyParser = require("body-parser");
-const cors = require("cors");
-require("dotenv").config({ path: __dirname + "/.env" });
 
+dotenv.config({ path: __dirname + "/.env" });
 const planetRouter = require("./routes/planets");
 const starRouter = require("./routes/stars");
 const galaxyRouter = require("./routes/galaxy");
-
 const { handleError } = require("./handlers/handleErrors");
 
 const app = express();
@@ -23,7 +23,7 @@ app.use("/stars", starRouter);
 app.use("/galaxies", galaxyRouter);
 
 // error handler
-app.use("/", function(req, res, next) {
+app.use("/", (req, res, next) => {
   const err: any = new Error("NOT FOUND");
   err.status = 404;
   next(err);
