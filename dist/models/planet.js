@@ -1,22 +1,27 @@
-const mongoose = require("mongoose");
-const planetSchema = mongoose.Schema({
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const planetSchema = new mongoose_1.default.Schema({
     name: {
-        //name of the planet
+        // name of the planet
         type: String,
-        required: true,
+        required: true
     },
     type: {
-        //solid, gas
+        // solid, gas
         type: String,
-        required: true,
+        required: true
     },
     picture: {
-        //url
+        // url
         type: String,
-        required: true,
+        required: true
     },
     temperature: Number,
-    surfaceArea: Number,
+    surfaceArea: Number // surface, nb of earth
 });
-module.exports = mongoose.model("Planet", planetSchema);
+exports.default = mongoose_1.default.model("Planet", planetSchema);
 //# sourceMappingURL=planet.js.map

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,24 +8,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const db = require("../models");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const models_1 = __importDefault(require("../models"));
 function getAllStars(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let [lowerLimit, upperLimit] = [0, 25];
             const { range } = req.params;
             if (range) {
-                [lowerLimit, upperLimit] = range.split("-").map(res => Number(res));
+                [lowerLimit, upperLimit] = range
+                    .split("-")
+                    .map((nb) => Number(nb));
             }
-            const nbOdStartsInDb = yield db.Star.count();
-            const stars = yield db.Star.find()
+            const nbOdStartsInDb = yield models_1.default.star.count(true);
+            const stars = yield models_1.default.star
+                .find()
                 .skip(lowerLimit)
                 .limit(upperLimit);
             const pageCount = Math.round(nbOdStartsInDb / upperLimit);
             return res.status(200).json({
                 pageCount,
                 currentPage: Math.round(lowerLimit / upperLimit),
-                stars,
+                stars
             });
         }
         catch (err) {
@@ -35,7 +43,7 @@ function getAllStars(req, res, next) {
 function getOneStar(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const star = yield db.Star.findById(req.params.id);
+            const star = yield models_1.default.star.findById(req.params.id);
             return res.status(200).json(star);
         }
         catch (err) {
@@ -46,24 +54,24 @@ function getOneStar(req, res, next) {
 function createStar(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { name, type, mass, distance, diameter, temperature, color, } = req.body;
-            const foundStar = yield db.Star.findOne({ name });
+            const { name, type, mass, distance, diameter, temperature, color } = req.body;
+            const foundStar = yield models_1.default.star.findOne({ name });
             if (foundStar) {
                 return next({
                     error: {
                         status: 400,
-                        message: "This star already exists in the database",
-                    },
+                        message: "This star already exists in the database"
+                    }
                 });
             }
-            const newStar = yield db.Star.create({
+            const newStar = yield models_1.default.star.create({
                 name,
                 type,
                 mass,
                 distance,
                 diameter,
                 temperature,
-                color,
+                color
             });
             yield newStar.save();
             return res.status(201).json(newStar);
@@ -76,15 +84,15 @@ function createStar(req, res, next) {
 function updateStar(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { name, type, mass, distance, diameter, temperature, color, } = req.body;
-            const updatedStar = yield db.Star.findByIdAndUpdate(req.params.id, {
+            const { name, type, mass, distance, diameter, temperature, color } = req.body;
+            const updatedStar = yield models_1.default.star.findByIdAndUpdate(req.params.id, {
                 name,
                 type,
                 mass,
                 distance,
                 diameter,
                 temperature,
-                color,
+                color
             });
             return res.status(201).json(updatedStar);
         }
@@ -96,7 +104,7 @@ function updateStar(req, res, next) {
 function deleteStar(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const deleted = yield db.Star.findByIdAndRemove(req.params.id);
+            const deleted = yield models_1.default.star.findByIdAndRemove(req.params.id);
             return res.status(200).json(deleted);
         }
         catch (err) {
@@ -104,11 +112,11 @@ function deleteStar(req, res, next) {
         }
     });
 }
-module.exports = {
+exports.default = {
     getAllStars,
     getOneStar,
     createStar,
     updateStar,
-    deleteStar,
+    deleteStar
 };
 //# sourceMappingURL=handleStars.js.map

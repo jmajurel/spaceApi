@@ -1,16 +1,20 @@
-const db = require("../models");
+import db from "../models";
+import { Request, Response, NextFunction } from "express";
 
-async function getAllStars(req, res, next) {
+async function getAllStars(req: Request, res: Response, next: NextFunction) {
   try {
     let [lowerLimit, upperLimit] = [0, 25];
     const { range } = req.params;
     if (range) {
-      [lowerLimit, upperLimit] = range.split("-").map(res => Number(res));
+      [lowerLimit, upperLimit] = range
+        .split("-")
+        .map((nb: string) => Number(nb));
     }
 
-    const nbOdStartsInDb = await db.Star.count();
+    const nbOdStartsInDb = await db.star.count(true);
 
-    const stars = await db.Star.find()
+    const stars = await db.star
+      .find()
       .skip(lowerLimit)
       .limit(upperLimit);
 
@@ -19,23 +23,23 @@ async function getAllStars(req, res, next) {
     return res.status(200).json({
       pageCount,
       currentPage: Math.round(lowerLimit / upperLimit),
-      stars,
+      stars
     });
   } catch (err) {
     return next(err);
   }
 }
 
-async function getOneStar(req, res, next) {
+async function getOneStar(req: Request, res: Response, next: NextFunction) {
   try {
-    const star = await db.Star.findById(req.params.id);
+    const star = await db.star.findById(req.params.id);
     return res.status(200).json(star);
   } catch (err) {
     return next(err);
   }
 }
 
-async function createStar(req, res, next) {
+async function createStar(req: Request, res: Response, next: NextFunction) {
   try {
     const {
       name,
@@ -44,27 +48,27 @@ async function createStar(req, res, next) {
       distance,
       diameter,
       temperature,
-      color,
+      color
     } = req.body;
 
-    const foundStar = await db.Star.findOne({ name });
+    const foundStar = await db.star.findOne({ name });
 
     if (foundStar) {
       return next({
         error: {
           status: 400,
-          message: "This star already exists in the database",
-        },
+          message: "This star already exists in the database"
+        }
       });
     }
-    const newStar = await db.Star.create({
+    const newStar = await db.star.create({
       name,
       type,
       mass,
       distance,
       diameter,
       temperature,
-      color,
+      color
     });
     await newStar.save();
     return res.status(201).json(newStar);
@@ -72,7 +76,7 @@ async function createStar(req, res, next) {
     return next(err);
   }
 }
-async function updateStar(req, res, next) {
+async function updateStar(req: Request, res: Response, next: NextFunction) {
   try {
     const {
       name,
@@ -81,16 +85,16 @@ async function updateStar(req, res, next) {
       distance,
       diameter,
       temperature,
-      color,
+      color
     } = req.body;
-    const updatedStar = await db.Star.findByIdAndUpdate(req.params.id, {
+    const updatedStar = await db.star.findByIdAndUpdate(req.params.id, {
       name,
       type,
       mass,
       distance,
       diameter,
       temperature,
-      color,
+      color
     });
     return res.status(201).json(updatedStar);
   } catch (err) {
@@ -98,19 +102,19 @@ async function updateStar(req, res, next) {
   }
 }
 
-async function deleteStar(req, res, next) {
+async function deleteStar(req: Request, res: Response, next: NextFunction) {
   try {
-    const deleted = await db.Star.findByIdAndRemove(req.params.id);
+    const deleted = await db.star.findByIdAndRemove(req.params.id);
     return res.status(200).json(deleted);
   } catch (err) {
     return next(err);
   }
 }
 
-module.exports = {
+export default {
   getAllStars,
   getOneStar,
   createStar,
   updateStar,
-  deleteStar,
+  deleteStar
 };

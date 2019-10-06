@@ -9,6 +9,8 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
-module.exports.Planet = require("./planet");
-module.exports.Star = require("./star");
-module.exports.Galaxy = require("./galaxy");
+import galaxy from "./galaxy";
+import planet from "./planet";
+import star from "./star";
+
+export default { planet, star, galaxy };

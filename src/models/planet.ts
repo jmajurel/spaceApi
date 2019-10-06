@@ -19,5 +19,4 @@ const planetSchema = new mongoose.Schema({
   temperature: Number, // surface temperature avg Kelvin
   surfaceArea: Number // surface, nb of earth
 });
-
-module.exports = mongoose.model("Planet", planetSchema);
+export default mongoose.model("Planet", planetSchema);
