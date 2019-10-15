@@ -17,12 +17,14 @@ function getAllStars(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let [lowerLimit, upperLimit] = [0, 25];
-            const { range } = req.params;
-            if (range) {
+            const range = req.query.range;
+            if (!!range) {
                 [lowerLimit, upperLimit] = range
                     .split("-")
                     .map((nb) => Number(nb));
             }
+            console.log("lowerLimit: " + lowerLimit);
+            console.log("upperLimit: " + upperLimit);
             const nbOdStartsInDb = yield models_1.default.star.count(true);
             const stars = yield models_1.default.star
                 .find()

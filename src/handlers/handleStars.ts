@@ -4,13 +4,12 @@ import { Request, Response, NextFunction } from "express";
 async function getAllStars(req: Request, res: Response, next: NextFunction) {
   try {
     let [lowerLimit, upperLimit] = [0, 25];
-    const { range } = req.params;
-    if (range) {
+    const range = req.query.range;
+    if (!!range) {
       [lowerLimit, upperLimit] = range
         .split("-")
         .map((nb: string) => Number(nb));
     }
-
     const nbOdStartsInDb = await db.star.count(true);
 
     const stars = await db.star
