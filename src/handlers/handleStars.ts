@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 async function getAllStars(req: Request, res: Response, next: NextFunction) {
   try {
     let [lowerLimit, upperLimit] = [0, 60];
-    const { range } = req.params;
+    const { range } = req.query;
     if (range) {
       [lowerLimit, upperLimit] = range
         .split("-")
@@ -18,11 +18,14 @@ async function getAllStars(req: Request, res: Response, next: NextFunction) {
       .skip(lowerLimit)
       .limit(upperLimit);
 
-    const pageCount = Math.round(nbOdStartsInDb / upperLimit);
+    const nbOfItems = upperLimit - lowerLimit;
+
+    const pageCount = Math.round(nbOdStartsInDb / nbOfItems);
+    const currentPage = Math.round(upperLimit / nbOfItems) - 1;
 
     return res.status(200).json({
       pageCount,
-      currentPage: Math.round(lowerLimit / upperLimit),
+      currentPage,
       stars
     });
   } catch (err) {

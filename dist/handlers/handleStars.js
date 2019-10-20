@@ -17,7 +17,7 @@ function getAllStars(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let [lowerLimit, upperLimit] = [0, 60];
-            const { range } = req.params;
+            const { range } = req.query;
             if (range) {
                 [lowerLimit, upperLimit] = range
                     .split("-")
@@ -28,10 +28,12 @@ function getAllStars(req, res, next) {
                 .find()
                 .skip(lowerLimit)
                 .limit(upperLimit);
-            const pageCount = Math.round(nbOdStartsInDb / upperLimit);
+            const nbOfItems = upperLimit - lowerLimit;
+            const pageCount = Math.round(nbOdStartsInDb / nbOfItems);
+            const currentPage = Math.round(upperLimit / nbOfItems) - 1;
             return res.status(200).json({
                 pageCount,
-                currentPage: Math.round(lowerLimit / upperLimit),
+                currentPage,
                 stars
             });
         }
