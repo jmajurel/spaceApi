@@ -16,7 +16,7 @@ const models_1 = __importDefault(require("../models"));
 function getAllStars(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let [lowerLimit, upperLimit] = [0, 25];
+            let [lowerLimit, upperLimit] = [0, 60];
             const { range } = req.params;
             if (range) {
                 [lowerLimit, upperLimit] = range

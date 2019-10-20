@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 
 async function getAllStars(req: Request, res: Response, next: NextFunction) {
   try {
-    let [lowerLimit, upperLimit] = [0, 25];
+    let [lowerLimit, upperLimit] = [0, 60];
     const { range } = req.params;
     if (range) {
       [lowerLimit, upperLimit] = range
